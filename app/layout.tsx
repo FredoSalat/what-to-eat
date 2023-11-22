@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import SelectedIngredientsContextProvider from "@/context/selected-ingredients-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <SelectedIngredientsContextProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </SelectedIngredientsContextProvider>
       </body>
     </html>
   );
