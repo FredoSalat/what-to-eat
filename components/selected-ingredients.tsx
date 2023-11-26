@@ -15,7 +15,7 @@ export default function SelectedIngredients() {
         {ingredients.map((selectedIngredient, index) => (
           <li
             key={index}
-            className="border bg-white/5 border-black/[0.1]  px-5 py-3"
+            className="border bg-white/5 border-black/[0.1] px-2 py-1"
           >
             {selectedIngredient}
           </li>

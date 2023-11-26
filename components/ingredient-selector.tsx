@@ -19,7 +19,7 @@ export default function IngredientSelector() {
         {popularIngredients.map((ingredient, index) => (
           <li
             key={index}
-            className="border bg-white/5 border-black/[0.1]  px-5 py-3 cursor-pointer hover:bg-zinc-200"
+            className="border bg-white/5 border-black/[0.1] px-5 py-3 cursor-pointer hover:bg-zinc-200"
             onClick={() => onIngredientClick(ingredient)}
           >
             {ingredient}
