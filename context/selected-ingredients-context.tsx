@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-import type { IngredientList } from "@/lib/types";
+import type { Ingredient, IngredientList } from "@/lib/types";
 
 type SelectedIngredientsProviderProps = {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ type SelectedIngredientsProviderProps = {
 
 type SelectedIngredientsContextType = {
   ingredients: IngredientList;
-  setIngredients: React.Dispatch<React.SetStateAction<IngredientList>>;
+  addIngredient: (selectedIngredient: Ingredient) => void;
 };
 
 export const SelectedIngredientsContext =
@@ -21,11 +21,29 @@ export default function SelectedIngredientsContextProvider({
 }: SelectedIngredientsProviderProps) {
   const [ingredients, setIngredients] = useState<IngredientList>([]);
 
+  const addIngredient = (selectedIngredient: Ingredient) => {
+    const ingredientExist = ingredients.filter(
+      (ingredient) => ingredient === selectedIngredient
+    );
+    if (ingredientExist.length > 0) {
+      setIngredients((prevIngredients) =>
+        prevIngredients.filter(
+          (ingredient) => ingredient !== selectedIngredient
+        )
+      );
+    } else {
+      setIngredients((prevIngredients) => [
+        ...prevIngredients,
+        selectedIngredient,
+      ]);
+    }
+  };
+
   return (
     <SelectedIngredientsContext.Provider
       value={{
         ingredients,
-        setIngredients,
+        addIngredient,
       }}
     >
       {children}
