@@ -4,6 +4,7 @@ import { useSelectedIngredientsContext } from "@/context/selected-ingredients-co
 import { popularIngredients } from "@/lib/data";
 import { Ingredient } from "@/lib/types";
 import React from "react";
+import Heading from "./heading";
 
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
@@ -12,9 +13,7 @@ export default function IngredientSelector() {
   };
   return (
     <>
-      <h3 className="font-semibold items-center mb-2 text-lg">
-        Popular ingredients...
-      </h3>
+      <Heading>Popular ingredients...</Heading>
       <ul className="flex flex-wrap  gap-2 text-lg text-gray-800">
         {popularIngredients.map((ingredient, index) => (
           <li

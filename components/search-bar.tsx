@@ -93,7 +93,6 @@ export default function SearchBar() {
         onKeyDown={onKeyDownHandler}
         value={searchTerm}
       />
-      {/* ... (existing code) */}
       {suggestions.length > 0 && (
         <ul
           ref={suggestionsListRef}
