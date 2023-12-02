@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
+
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SelectedIngredientsContextProvider from "@/context/selected-ingredients-context";
@@ -20,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SelectedIngredientsContextProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </SelectedIngredientsContextProvider>
+        <Providers>
+          <SelectedIngredientsContextProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </SelectedIngredientsContextProvider>
+        </Providers>
       </body>
     </html>
   );
