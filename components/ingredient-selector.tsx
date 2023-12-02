@@ -20,7 +20,7 @@ export default function IngredientSelector() {
             key={index}
             className={`border bg-white/5 border-black/[0.1] px-5 py-3 cursor-pointer hover:bg-zinc-200 transition-colors duration-100 ${
               ingredients.includes(ingredient)
-                ? "bg-blue-200 hover:bg-blue-300"
+                ? "bg-blue-300 hover:bg-blue-400"
                 : ""
             }`}
             onClick={() => onIngredientClick(ingredient)}

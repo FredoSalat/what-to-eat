@@ -7,9 +7,11 @@ export default function Recipes() {
   return (
     <>
       <Heading>Recipes</Heading>
-      {recipes.map((recipe, index) => (
-        <RecipeCard key={index} {...recipe} />
-      ))}
+      <div className="flex flex-col justify-center gap-5 max-w-[500px] m-auto">
+        {recipes.map((recipe, index) => (
+          <RecipeCard key={index} {...recipe} />
+        ))}
+      </div>
     </>
   );
 }
