@@ -1,5 +1,9 @@
-import { popularIngredients } from "./data";
+import { popularIngredients, allIngredients } from "./data";
 
-export type Ingredient = (typeof popularIngredients)[number];
+export type PopularIngredient = (typeof popularIngredients)[number];
+
+export type Ingredient = (typeof allIngredients)[number];
+
+export type PopularIngredientList = PopularIngredient[];
 
 export type IngredientList = Ingredient[];
