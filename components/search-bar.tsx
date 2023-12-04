@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { popularIngredients } from "@/lib/data";
+import { allIngredients } from "@/lib/data";
 import { Ingredient, IngredientList } from "@/lib/types";
 import React, { useRef, useState, useEffect } from "react";
 
@@ -21,7 +21,7 @@ export default function SearchBar() {
     let filteredSuggestions: IngredientList = [];
 
     if (value.length > 1) {
-      filteredSuggestions = popularIngredients.filter(
+      filteredSuggestions = allIngredients.filter(
         (ingredient) =>
           ingredient.toLowerCase().includes(value.toLowerCase()) &&
           !ingredients.includes(ingredient)
