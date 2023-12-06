@@ -2,15 +2,13 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-import type { Ingredient, IngredientList } from "@/lib/types";
-
 type SelectedIngredientsProviderProps = {
   children: React.ReactNode;
 };
 
 type SelectedIngredientsContextType = {
-  ingredients: IngredientList;
-  addIngredient: (selectedIngredient: Ingredient) => void;
+  ingredients: string[];
+  addIngredient: (selectedIngredient: string) => void;
 };
 
 export const SelectedIngredientsContext =
@@ -19,9 +17,9 @@ export const SelectedIngredientsContext =
 export default function SelectedIngredientsContextProvider({
   children,
 }: SelectedIngredientsProviderProps) {
-  const [ingredients, setIngredients] = useState<IngredientList>([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
 
-  const addIngredient = (selectedIngredient: Ingredient) => {
+  const addIngredient = (selectedIngredient: string) => {
     const ingredientExist = ingredients.filter(
       (ingredient) => ingredient === selectedIngredient
     );

@@ -1,24 +1,25 @@
 "use client";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { allIngredients } from "@/lib/data";
-import { Ingredient, IngredientList } from "@/lib/types";
+import { allIngredients as getAllIngredients } from "@/lib/recipeMatch";
 import React, { useRef, useState, useEffect } from "react";
 
 export default function SearchBar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<IngredientList>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement | null>(null);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
+
+  const allIngredients: string[] = getAllIngredients();
 
   const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearchTerm(value);
 
-    let filteredSuggestions: IngredientList = [];
+    let filteredSuggestions: string[] = [];
 
     if (value.length > 1) {
       filteredSuggestions = allIngredients.filter(
@@ -31,7 +32,7 @@ export default function SearchBar() {
     setSuggestions(filteredSuggestions);
   };
 
-  const onSuggestionClickHandler = (suggestion: Ingredient) => {
+  const onSuggestionClickHandler = (suggestion: string) => {
     addIngredient(suggestion);
     setSuggestions([]);
     setSearchTerm("");

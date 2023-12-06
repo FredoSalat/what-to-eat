@@ -1,15 +1,17 @@
-/* export function allIngredients(): string[] {
-    const ingredients = new Set<string>();
-    for (const r of myRecipes) {
-      for (const ing of r.Ingredients) {
-        ingredients.add(ing.Name);
-      }
+import { myRecipes } from "./data";
+
+export function allIngredients(): string[] {
+  const ingredients = new Set<string>();
+  for (const r of myRecipes) {
+    for (const ing of r.Ingredients) {
+      ingredients.add(ing.Name);
     }
-  
-    return [...ingredients];
   }
-  
-  export function mostPopularIngredients(): string[] {
+
+  return [...ingredients];
+}
+
+/*   export function mostPopularIngredients(): string[] {
     const seenCountByIngredient: Record<string, number> = {};
   
     for (const r of myRecipes) {
@@ -41,4 +43,5 @@
     return myRecipes.filter((r) =>
       r.Ingredients.every((ing) => pickedIngredients.includes(ing.Name))
     );
-   */
+  
+ */
