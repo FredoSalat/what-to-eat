@@ -6,7 +6,7 @@ export default function RecipeCard({ ...recipe }) {
     <Card maxH="sm">
       <CardBody>
         <Image
-          src={recipe.Image_Name}
+          src={recipe.Image}
           alt={recipe.Name}
           className="w-full h-[300px] rounded-lg object-cover"
         />
