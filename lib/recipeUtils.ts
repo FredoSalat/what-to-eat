@@ -29,21 +29,10 @@ export function mostPopularIngredients(): string[] {
     .slice(0, 9);
 }
 
-/* export function findRecipe(pickedIngredients: Ingredients): Recipes {
-    return myRecipes.filter((r) => {
-      for (const ing of r.Ingredients) {
-        if (!pickedIngredients.includes(ing.Name)) {
-          return false;
-        }
-      }
-      return true;
-    });
-  }
-  
+/*   
   export function findRecipe(pickedIngredients: string[]): Recipes {
     return myRecipes.filter((r) =>
       r.Ingredients.every((ing) => pickedIngredients.includes(ing.Name))
     );
   
-
  */

@@ -1,8 +1,20 @@
+"use client";
+
+import { Recipe, findRecipe } from "@/lib/data";
 import Heading from "./heading";
 import RecipeCard from "./recipe-card";
-import { myRecipes } from "@/lib/data";
+import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
+import { useEffect, useState } from "react";
 
 export default function Recipes() {
+  const { ingredients } = useSelectedIngredientsContext();
+  const [myRecipes, setMyRecipes] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    const recipes = findRecipe(ingredients);
+    setMyRecipes(recipes);
+  }, [ingredients]);
+
   return (
     <>
       <Heading>Recipes</Heading>
