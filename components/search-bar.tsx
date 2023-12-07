@@ -1,8 +1,9 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
+
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { allIngredients as getAllIngredients } from "@/lib/recipeMatch";
-import React, { useRef, useState, useEffect } from "react";
+import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
 
 export default function SearchBar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();

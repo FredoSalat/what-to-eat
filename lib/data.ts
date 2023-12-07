@@ -1,45 +1,7 @@
-import conCarne from "@/public/images/concarne.png";
+import conCarne from "@/public/images/conCarne.png";
 import potatisgratäng from "@/public/images/potatisgratäng.png";
 import spagettiKöttfärs from "@/public/images/spagettiKöttfärsås.png";
 import { StaticImageData } from "next/image";
-
-export const allIngredients = [
-  "Butter",
-  "Worcestershire sauce",
-  "Ground mustard",
-  "Fried onions",
-  "Chicken",
-  "Milk",
-  "Water",
-  "Macaroni",
-  "Velveeta",
-  "Cheddar cheese",
-  "Pasta",
-  "Peas",
-  "Shrimp",
-  "Alfredo Sauce",
-  "Parmesan cheese",
-  "Barbecue sauce",
-  "Beef broth",
-  "Lemon juice",
-  "Flank steak",
-  "Chicken broth",
-  "Whipped cream",
-  "Rosemary",
-] as const;
-
-export const popularIngredients = [
-  "Butter",
-  "Onions",
-  "Chicken",
-  "Milk",
-  "Macaroni",
-  "Cheddar cheese",
-  "Pasta",
-  "Peas",
-  "Lemon juice",
-  "Whipped cream",
-] as const;
 
 interface Ingredient {
   Name: string;

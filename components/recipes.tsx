@@ -1,7 +1,6 @@
-import React from "react";
 import Heading from "./heading";
-import { myRecipes } from "@/lib/data";
 import RecipeCard from "./recipe-card";
+import { myRecipes } from "@/lib/data";
 
 export default function Recipes() {
   return (
