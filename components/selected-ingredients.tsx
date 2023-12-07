@@ -1,7 +1,6 @@
 "use client";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import React from "react";
 import Heading from "./heading";
 
 export default function SelectedIngredients() {

@@ -1,9 +1,8 @@
 "use client";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import React from "react";
+import { mostPopularIngredients } from "@/lib/recipeUtils";
 import Heading from "./heading";
-import { mostPopularIngredients } from "@/lib/recipeMatch";
 
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();

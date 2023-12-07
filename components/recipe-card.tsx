@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import Image from "next/image";
+import { Card, CardBody } from "@chakra-ui/react";
 
 export default function RecipeCard({ ...recipe }) {
   return (
