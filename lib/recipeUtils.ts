@@ -1,4 +1,4 @@
-import { myRecipes } from "./data";
+import { Recipe, myRecipes } from "./data";
 
 export function allIngredients(): string[] {
   const ingredients = new Set<string>();
@@ -27,6 +27,17 @@ export function mostPopularIngredients(): string[] {
     )
     .reverse()
     .slice(0, 9);
+}
+
+export function findRecipe(pickedIngredients: string[]): Recipe[] {
+  return myRecipes.filter((r) => {
+    for (const ing of r.Ingredients) {
+      if (!pickedIngredients.includes(ing.Name)) {
+        return false;
+      }
+    }
+    return true;
+  });
 }
 
 /*   

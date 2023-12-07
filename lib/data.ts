@@ -16,17 +16,6 @@ export interface Recipe {
   Ingredients: Ingredient[];
 }
 
-export function findRecipe(pickedIngredients: string[]): Recipe[] {
-  return myRecipes.filter((r) => {
-    for (const ing of r.Ingredients) {
-      if (!pickedIngredients.includes(ing.Name)) {
-        return false;
-      }
-    }
-    return true;
-  });
-}
-
 export const myRecipes: Recipe[] = [
   {
     Name: "Spaghetti och köttfärssås, Jenny Finns recept",

@@ -1,10 +1,11 @@
 "use client";
 
-import { Recipe, findRecipe } from "@/lib/data";
+import { Recipe } from "@/lib/data";
 import Heading from "./heading";
 import RecipeCard from "./recipe-card";
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import { useEffect, useState } from "react";
+import { findRecipe } from "@/lib/recipeUtils";
 
 export default function Recipes() {
   const { ingredients } = useSelectedIngredientsContext();
