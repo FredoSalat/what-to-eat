@@ -89,7 +89,7 @@ export default function SearchBar() {
         </svg>
       </div>
       <input
-        className="w-full p-4 ps-10 border-2 border-black/[0.1] transition-colors focus:outline-none focus:border-blue-200"
+        className="w-full p-4 ps-10 border-2 border-black/[0.1] transition-colors focus:outline-none focus:border-blue-200 rounded-md"
         placeholder="Search ingredient"
         onChange={onSearchHandler}
         onKeyDown={onKeyDownHandler}
