@@ -1,10 +1,31 @@
-import { Recipe, myRecipes } from "./data";
+import { Ingredient, Recipe, myRecipes } from "./data";
+
+export function allCategories(): string[] {
+  const categories = new Set<string>();
+  for (const c of myRecipes) {
+    for (const cat of c.Ingredients) {
+      categories.add(cat.Category);
+    }
+  }
+  return [...categories];
+}
 
 export function allIngredients(): string[] {
   const ingredients = new Set<string>();
   for (const r of myRecipes) {
     for (const ing of r.Ingredients) {
       ingredients.add(ing.Name);
+    }
+  }
+
+  return [...ingredients];
+}
+
+export function allIngredientsWCat(): Ingredient[] {
+  const ingredients = new Set<Ingredient>();
+  for (const r of myRecipes) {
+    for (const ing of r.Ingredients) {
+      ingredients.add(ing);
     }
   }
 
