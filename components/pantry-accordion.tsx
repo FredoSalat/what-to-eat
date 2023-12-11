@@ -1,3 +1,4 @@
+import { allCategories, allIngredientsWCat } from "@/lib/recipeUtils";
 import {
   Accordion,
   AccordionButton,
@@ -9,41 +10,35 @@ import {
 import React from "react";
 
 export default function PantryAccordion() {
-  return (
-    <Accordion defaultIndex={[0]} allowMultiple>
-      <AccordionItem>
-        <h2>
-          <AccordionButton>
-            <Box as="span" flex="1" textAlign="left">
-              Basvaror
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </AccordionPanel>
-      </AccordionItem>
+  const categories = allCategories();
 
-      <AccordionItem>
-        <h2>
-          <AccordionButton>
-            <Box as="span" flex="1" textAlign="left">
-              Kött
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+  const ingredientsWC = allIngredientsWCat();
+
+  const getIngredientsByCategory = (category: string) =>
+    ingredientsWC.filter((ingredient) => ingredient.Category === category);
+
+  return (
+    <>
+      {categories.map((category, key) => (
+        <Accordion key={key} defaultIndex={[0]} allowMultiple>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  {category}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              {getIngredientsByCategory(category).map((ingredient, index) => (
+                <div key={index}>{ingredient.Name}</div>
+                // Adjust the rendering based on your ingredient structure
+              ))}
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      ))}
+    </>
   );
 }
