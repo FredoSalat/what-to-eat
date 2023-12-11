@@ -3,30 +3,69 @@
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import { mostPopularIngredients } from "@/lib/recipeUtils";
 import Heading from "./heading";
+import { useState } from "react";
+import { FaArrowUp } from "react-icons/fa";
 
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
   const popularIngredients = mostPopularIngredients();
+
+  const [ingredientsShowing, setIngredientsShowing] = useState(
+    popularIngredients.slice(0, 4)
+  );
   const onIngredientClick = (ingredient: string) => {
     addIngredient(ingredient);
   };
+
+  const onShowMoreClick = () => {
+    const nextIngredients = popularIngredients.slice(
+      ingredientsShowing.length,
+      ingredientsShowing.length + 4
+    );
+
+    setIngredientsShowing((prevIngredients) => [
+      ...prevIngredients,
+      ...nextIngredients,
+    ]);
+  };
+  const onShowLessClick = () => {
+    setIngredientsShowing(popularIngredients.slice(0, 4));
+  };
   return (
     <>
-      <Heading>Popular ingredients...</Heading>
-      <ul className="flex flex-wrap  gap-2 text-lg text-gray-800">
-        {popularIngredients.map((ingredient, index) => (
+      <Heading>Popular ingredients</Heading>
+      <ul className="flex flex-wrap gap-2 text-gray-800">
+        {ingredientsShowing.map((ingredient, index) => (
           <li
             key={index}
-            className={`borde border-black/[0.1] px-5 py-3 cursor-pointer transition-colors duration-100 ${
+            className={`border border-black/[0.1] px-2 py-1 rounded-md cursor-pointer transition-colors duration-100 ${
               ingredients.includes(ingredient)
-                ? "bg-blue-300 lg:hover:bg-blue-400"
-                : "lg:hover:bg-zinc-200 bg-white/5"
+                ? "bg-blue-300 sm:hover:bg-blue-400"
+                : "sm:hover:bg-zinc-200 bg-white/5"
             }`}
             onClick={() => onIngredientClick(ingredient)}
           >
             {ingredient}
           </li>
         ))}
+        <li
+          className={`border text-sm sm:hover:bg-zinc-200 bg-slate-300 border-black/[0.1] px-2 py-1 rounded-md cursor-pointer transition-colors duration-100
+          }`}
+          onClick={onShowMoreClick}
+        >
+          show more
+        </li>
+        {ingredientsShowing.length > 4 ? (
+          <li
+            className={`border text-sm sm:hover:bg-zinc-200 bg-slate-300 border-black/[0.1] px-2 py-1 rounded-md cursor-pointer transition-colors duration-100 items-center justify-center flex
+          }`}
+            onClick={onShowLessClick}
+          >
+            <FaArrowUp />
+          </li>
+        ) : (
+          ""
+        )}
       </ul>
     </>
   );
