@@ -1,6 +1,6 @@
 import IngredientSelector from "@/components/ingredient-selector";
 import SearchBar from "@/components/search-bar";
-import SelectedIngredients from "@/components/selected-ingredients";
+import SelectedIngredients from "@/components/pantry";
 import React from "react";
 
 export default function page() {

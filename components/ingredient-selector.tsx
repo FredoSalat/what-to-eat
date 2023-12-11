@@ -33,7 +33,7 @@ export default function IngredientSelector() {
   };
   return (
     <>
-      <Heading>Popular ingredients</Heading>
+      <p className="font-semibold">Populära ingredienser</p>
       <ul className="flex flex-wrap gap-2 text-gray-800">
         {ingredientsShowing.map((ingredient, index) => (
           <li
@@ -53,7 +53,7 @@ export default function IngredientSelector() {
           }`}
           onClick={onShowMoreClick}
         >
-          show more
+          visa fler
         </li>
         {ingredientsShowing.length > 4 ? (
           <li
