@@ -25,8 +25,7 @@ export function mostPopularIngredients(): string[] {
     .sort((a, b) =>
       seenCountByIngredient[a] < seenCountByIngredient[b] ? -1 : 1
     )
-    .reverse()
-    .slice(0, 9);
+    .reverse();
 }
 
 export function findRecipe(pickedIngredients: string[]): Recipe[] {
