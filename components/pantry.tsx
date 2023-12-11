@@ -2,14 +2,21 @@
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import Heading from "./heading";
+import PantryAccordion from "./pantry-accordion";
 
 export default function SelectedIngredients() {
   const { ingredients } = useSelectedIngredientsContext();
 
   return (
     <div className="mb-6">
-      <Heading>Selected ingredients</Heading>
-      <ul className="flex flex-wrap  gap-2 text-lg text-gray-800">
+      <Heading>Mitt Skafferi</Heading>
+      <PantryAccordion />
+    </div>
+  );
+}
+
+{
+  /* <ul className="flex flex-wrap  gap-2 text-lg text-gray-800">
         {ingredients.map((selectedIngredient, index) => (
           <li
             key={index}
@@ -18,7 +25,5 @@ export default function SelectedIngredients() {
             {selectedIngredient}
           </li>
         ))}
-      </ul>
-    </div>
-  );
+      </ul> */
 }
