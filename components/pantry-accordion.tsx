@@ -1,4 +1,5 @@
-import { allCategories, allIngredientsWCat } from "@/lib/recipeUtils";
+import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
+import { allCategoryNames } from "@/lib/recipeUtils";
 import {
   Accordion,
   AccordionButton,
@@ -10,12 +11,11 @@ import {
 import React from "react";
 
 export default function PantryAccordion() {
-  const categories = allCategories();
-
-  const ingredientsWC = allIngredientsWCat();
+  const categories = allCategoryNames();
+  const { ingredients } = useSelectedIngredientsContext();
 
   const getIngredientsByCategory = (category: string) =>
-    ingredientsWC.filter((ingredient) => ingredient.Category === category);
+    ingredients.filter((ingredient) => ingredient.Category === category);
 
   return (
     <>
