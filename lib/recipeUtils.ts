@@ -1,6 +1,17 @@
 import { Ingredient, Recipe, myRecipes } from "./data";
 
-export function allCategories(): string[] {
+export function allIngredients(): Ingredient[] {
+  const ingredients = new Set<Ingredient>();
+  for (const r of myRecipes) {
+    for (const ing of r.Ingredients) {
+      ingredients.add(ing);
+    }
+  }
+
+  return [...ingredients];
+}
+
+export function allCategoryNames(): string[] {
   const categories = new Set<string>();
   for (const c of myRecipes) {
     for (const cat of c.Ingredients) {
@@ -10,22 +21,11 @@ export function allCategories(): string[] {
   return [...categories];
 }
 
-export function allIngredients(): string[] {
+export function allIngredientNames(): string[] {
   const ingredients = new Set<string>();
   for (const r of myRecipes) {
     for (const ing of r.Ingredients) {
       ingredients.add(ing.Name);
-    }
-  }
-
-  return [...ingredients];
-}
-
-export function allIngredientsWCat(): Ingredient[] {
-  const ingredients = new Set<Ingredient>();
-  for (const r of myRecipes) {
-    for (const ing of r.Ingredients) {
-      ingredients.add(ing);
     }
   }
 
@@ -59,11 +59,3 @@ export function findRecipe(pickedIngredients: string[]): Recipe[] {
     return true;
   });
 }
-
-/*   
-  export function findRecipe(pickedIngredients: string[]): Recipes {
-    return myRecipes.filter((r) =>
-      r.Ingredients.every((ing) => pickedIngredients.includes(ing.Name))
-    );
-  
- */
