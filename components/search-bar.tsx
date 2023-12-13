@@ -4,28 +4,29 @@ import { useRef, useState, useEffect } from "react";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
+import { Ingredient } from "@/lib/data";
 
 export default function SearchBar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<Ingredient[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement | null>(null);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
 
-  const allIngredients: string[] = getAllIngredients();
+  const allIngredients: Ingredient[] = getAllIngredients();
 
   const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearchTerm(value);
 
-    let filteredSuggestions: string[] = [];
+    let filteredSuggestions: Ingredient[] = [];
 
     if (value.length > 1) {
       filteredSuggestions = allIngredients.filter(
         (ingredient) =>
-          ingredient.toLowerCase().includes(value.toLowerCase()) &&
+          ingredient.Name.toLowerCase().includes(value.toLowerCase()) &&
           !ingredients.includes(ingredient)
       );
     }
@@ -33,8 +34,8 @@ export default function SearchBar() {
     setSuggestions(filteredSuggestions);
   };
 
-  const onSuggestionClickHandler = (suggestion: string) => {
-    addIngredient(suggestion);
+  const onSuggestionClickHandler = (suggestion: Ingredient) => {
+    addIngredient(suggestion.Name);
     setSuggestions([]);
     setSearchTerm("");
   };
@@ -108,7 +109,7 @@ export default function SearchBar() {
               }`}
               onClick={() => onSuggestionClickHandler(suggestion)}
             >
-              {suggestion}
+              {suggestion.Name}
             </li>
           ))}
         </ul>

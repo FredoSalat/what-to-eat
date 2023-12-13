@@ -11,16 +11,6 @@ export function allIngredients(): Ingredient[] {
   return [...ingredients];
 }
 
-export function allCategoryNames(): string[] {
-  const categories = new Set<string>();
-  for (const c of myRecipes) {
-    for (const cat of c.Ingredients) {
-      categories.add(cat.Category);
-    }
-  }
-  return [...categories];
-}
-
 export function allIngredientNames(): string[] {
   const ingredients = new Set<string>();
   for (const r of myRecipes) {
