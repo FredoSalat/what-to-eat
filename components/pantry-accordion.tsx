@@ -1,5 +1,4 @@
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { allCategoryNames } from "@/lib/recipeUtils";
 import {
   Accordion,
   AccordionButton,
@@ -11,16 +10,26 @@ import {
 import React from "react";
 
 export default function PantryAccordion() {
-  const categories = allCategoryNames();
   const { ingredients } = useSelectedIngredientsContext();
 
-  const getIngredientsByCategory = (category: string) =>
+  const ingredientsByCategory = (category: string) =>
     ingredients.filter((ingredient) => ingredient.Category === category);
+
+  const uniqueCategories = (): string[] => {
+    const uniqueCategorySet = new Set<string>();
+
+    ingredients.forEach((ingredient) => {
+      uniqueCategorySet.add(ingredient.Category);
+    });
+    const uniqueCategoriesArray = Array.from(uniqueCategorySet);
+
+    return uniqueCategoriesArray;
+  };
 
   return (
     <>
-      {categories.map((category, key) => (
-        <Accordion key={key} defaultIndex={[0]} allowMultiple>
+      {uniqueCategories().map((category, key) => (
+        <Accordion key={key} allowToggle allowMultiple>
           <AccordionItem>
             <h2>
               <AccordionButton>
@@ -31,10 +40,11 @@ export default function PantryAccordion() {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              {getIngredientsByCategory(category).map((ingredient, index) => (
-                <div key={index}>{ingredient.Name}</div>
-                // Adjust the rendering based on your ingredient structure
-              ))}
+              <ul>
+                {ingredientsByCategory(category).map((ingredient, index) => (
+                  <li key={index}>{ingredient.Name}</li>
+                ))}
+              </ul>
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
