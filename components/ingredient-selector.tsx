@@ -8,18 +8,29 @@ import { FaArrowUp } from "react-icons/fa";
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
   const [popularIngredients, setPopularIngredients] = useState<string[]>([]);
-
-  const fetchPopularIngredients = async () => {
-    const ingredients = await mostPopularIngredients();
-    setPopularIngredients(ingredients);
-  };
+  const [loading, setLoading] = useState(true); // New loading state
 
   useEffect(() => {
+    const fetchPopularIngredients = async () => {
+      try {
+        const fetchedIngredients = await mostPopularIngredients();
+        setPopularIngredients(fetchedIngredients);
+      } catch (error) {
+        console.error("Error fetching popular ingredients:", error);
+      } finally {
+        setLoading(false); // Set loading to false regardless of success or failure
+      }
+    };
+
     fetchPopularIngredients();
   }, []);
-  const [ingredientsShowing, setIngredientsShowing] = useState(
-    popularIngredients.slice(0, 4)
-  );
+
+  const [ingredientsShowing, setIngredientsShowing] = useState<string[]>([]);
+
+  useEffect(() => {
+    setIngredientsShowing(popularIngredients.slice(0, 4));
+  }, [popularIngredients]); // Update ingredientsShowing when popularIngredients changes
+
   const onIngredientClick = (ingredient: string) => {
     addIngredient(ingredient);
   };

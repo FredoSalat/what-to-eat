@@ -27,8 +27,8 @@ export async function mostPopularIngredients(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
-    console.log(response);
     const recipes = response.data;
+
     console.log(recipes);
 
     if (!recipes || !Array.isArray(recipes)) {
@@ -37,11 +37,11 @@ export async function mostPopularIngredients(): Promise<string[]> {
 
     const seenCountByIngredient: Record<string, number> = {};
 
-    for (const r of recipes) {
-      if (r.Ingredients && Array.isArray(r.Ingredients)) {
-        for (const ing of r.Ingredients) {
-          seenCountByIngredient[ing.Name] ??= 0;
-          seenCountByIngredient[ing.Name] += 1;
+    for (const recipe of recipes) {
+      if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
+        for (const ingredient of recipe.ingredients) {
+          seenCountByIngredient[ingredient.ingredient] ??= 0;
+          seenCountByIngredient[ingredient.ingredient] += 1;
         }
       }
     }
