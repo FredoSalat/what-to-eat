@@ -1,6 +1,6 @@
 "use client";
 
-import { Ingredient } from "@/lib/data";
+import { Ingredient, TempIngredient } from "@/lib/data";
 import { allIngredients } from "@/lib/recipeUtils";
 import { createContext, useContext, useState } from "react";
 
@@ -9,7 +9,7 @@ type SelectedIngredientsProviderProps = {
 };
 
 type SelectedIngredientsContextType = {
-  ingredients: Ingredient[];
+  ingredients: TempIngredient[];
   addIngredient: (selectedIngredient: string) => void;
 };
 
@@ -19,28 +19,37 @@ export const SelectedIngredientsContext =
 export default function SelectedIngredientsContextProvider({
   children,
 }: SelectedIngredientsProviderProps) {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<TempIngredient[]>([]);
 
-  const addIngredient = (selectedIngredient: string) => {
-    const ingredientExist = ingredients.filter(
-      (ingredient) => ingredient.Name === selectedIngredient
-    );
-    if (ingredientExist.length > 0) {
-      setIngredients((prevIngredients) =>
-        prevIngredients.filter(
-          (ingredient) => ingredient.Name !== selectedIngredient
-        )
+  const addIngredient = async (selectedIngredient: string) => {
+    try {
+      const allIngredientsList = await allIngredients();
+      const ingredientExist = ingredients.some(
+        (ingredient) => ingredient.name === selectedIngredient
       );
-    } else {
-      const allIngredientsList = allIngredients();
 
-      const ingredientToAdd = allIngredientsList.filter(
-        (ingredient) => ingredient.Name === selectedIngredient
-      );
-      setIngredients((prevIngredients) => [
-        ...prevIngredients,
-        ingredientToAdd[0],
-      ]);
+      if (ingredientExist) {
+        setIngredients((prevIngredients) =>
+          prevIngredients.filter(
+            (ingredient) => ingredient.name !== selectedIngredient
+          )
+        );
+      } else {
+        const ingredientToAdd = allIngredientsList.find(
+          (ingredient) => ingredient.name === selectedIngredient
+        );
+
+        if (ingredientToAdd) {
+          setIngredients((prevIngredients) => [
+            ...prevIngredients,
+            ingredientToAdd,
+          ]);
+        } else {
+          console.error(`Ingredient not found: ${selectedIngredient}`);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching all ingredients:");
     }
   };
 
@@ -61,7 +70,7 @@ export function useSelectedIngredientsContext() {
 
   if (context === null) {
     throw new Error(
-      "useSelectedIngredientsContext must be used within an SelectedIngredientsContextProvider"
+      "useSelectedIngredientsContext must be used within a SelectedIngredientsContextProvider"
     );
   }
   return context;

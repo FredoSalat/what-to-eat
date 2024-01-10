@@ -3,6 +3,16 @@ import potatisgratäng from "@/public/images/potatisgratäng.png";
 import spagettiKöttfärs from "@/public/images/spagettiKöttfärsås.png";
 import { StaticImageData } from "next/image";
 
+export interface TempIngredient {
+  name: string;
+  preparation: string;
+}
+
+export interface TempRecipe {
+  title: string;
+  ingredients: TempIngredient[];
+}
+
 export interface Ingredient {
   Name: string;
   Preparation: string;

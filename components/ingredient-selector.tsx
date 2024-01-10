@@ -8,7 +8,7 @@ import { FaArrowUp } from "react-icons/fa";
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
   const [popularIngredients, setPopularIngredients] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPopularIngredients = async () => {
@@ -18,7 +18,7 @@ export default function IngredientSelector() {
       } catch (error) {
         console.error("Error fetching popular ingredients:", error);
       } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        setLoading(false);
       }
     };
 
@@ -29,7 +29,7 @@ export default function IngredientSelector() {
 
   useEffect(() => {
     setIngredientsShowing(popularIngredients.slice(0, 4));
-  }, [popularIngredients]); // Update ingredientsShowing when popularIngredients changes
+  }, [popularIngredients]);
 
   const onIngredientClick = (ingredient: string) => {
     addIngredient(ingredient);
@@ -58,7 +58,7 @@ export default function IngredientSelector() {
             key={index}
             className={`border border-black/[0.1] px-2 py-1 rounded-md cursor-pointer transition-colors duration-100 ${
               ingredients.some(
-                (ingredient) => ingredient.Name === ingredientShowing
+                (ingredient) => ingredient.name === ingredientShowing
               )
                 ? "bg-blue-300 sm:hover:bg-blue-400"
                 : "sm:hover:bg-zinc-200 bg-white/5"

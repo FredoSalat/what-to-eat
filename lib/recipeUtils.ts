@@ -1,11 +1,21 @@
 import axios from "axios";
-import { Ingredient, Recipe, myRecipes } from "./data";
+import { Ingredient, Recipe, TempIngredient, myRecipes } from "./data";
 
-export function allIngredients(): Ingredient[] {
-  const ingredients = new Set<Ingredient>();
-  for (const r of myRecipes) {
-    for (const ing of r.Ingredients) {
-      ingredients.add(ing);
+export async function allIngredients(): Promise<TempIngredient[]> {
+  const response = await axios.get(`/api/recipe`);
+
+  console.log(response);
+
+  const recipes = response.data;
+
+  console.log(recipes);
+  if (!recipes || !Array.isArray(recipes)) {
+    throw new Error("Invalid response format from the server");
+  }
+  const ingredients = new Set<TempIngredient>();
+  for (const recipe of recipes) {
+    for (const ingredient of recipe.ingredients) {
+      ingredients.add(ingredient);
     }
   }
 
@@ -27,10 +37,11 @@ export async function mostPopularIngredients(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
+    console.log(response);
+
     const recipes = response.data;
 
     console.log(recipes);
-
     if (!recipes || !Array.isArray(recipes)) {
       throw new Error("Invalid response format from the server");
     }
@@ -40,8 +51,8 @@ export async function mostPopularIngredients(): Promise<string[]> {
     for (const recipe of recipes) {
       if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
         for (const ingredient of recipe.ingredients) {
-          seenCountByIngredient[ingredient.ingredient] ??= 0;
-          seenCountByIngredient[ingredient.ingredient] += 1;
+          seenCountByIngredient[ingredient.name] ??= 0;
+          seenCountByIngredient[ingredient.name] += 1;
         }
       }
     }
