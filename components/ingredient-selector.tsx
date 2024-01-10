@@ -2,13 +2,21 @@
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import { mostPopularIngredients } from "@/lib/recipeUtils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
-  const popularIngredients = mostPopularIngredients();
+  const [popularIngredients, setPopularIngredients] = useState<string[]>([]);
 
+  const fetchPopularIngredients = async () => {
+    const ingredients = await mostPopularIngredients();
+    setPopularIngredients(ingredients);
+  };
+
+  useEffect(() => {
+    fetchPopularIngredients();
+  }, []);
   const [ingredientsShowing, setIngredientsShowing] = useState(
     popularIngredients.slice(0, 4)
   );
