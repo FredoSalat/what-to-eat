@@ -8,7 +8,7 @@ export interface Ingredient {
   Preparation: string;
   Amount: number | null;
   Unit: string | null;
-  Category: string; // New property for ingredient category
+  Category: string;
 }
 
 export interface Recipe {
