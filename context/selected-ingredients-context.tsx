@@ -1,6 +1,6 @@
 "use client";
 
-import { Ingredient, TempIngredient } from "@/lib/types";
+import { Ingredient } from "@/lib/types";
 import { allIngredients } from "@/lib/recipeUtils";
 import { createContext, useContext, useState } from "react";
 
@@ -9,7 +9,7 @@ type SelectedIngredientsProviderProps = {
 };
 
 type SelectedIngredientsContextType = {
-  ingredients: TempIngredient[];
+  ingredients: Ingredient[];
   addIngredient: (selectedIngredient: string) => void;
 };
 
@@ -19,24 +19,24 @@ export const SelectedIngredientsContext =
 export default function SelectedIngredientsContextProvider({
   children,
 }: SelectedIngredientsProviderProps) {
-  const [ingredients, setIngredients] = useState<TempIngredient[]>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   const addIngredient = async (selectedIngredient: string) => {
     try {
       const allIngredientsList = await allIngredients();
       const ingredientExist = ingredients.some(
-        (ingredient) => ingredient.name === selectedIngredient
+        (ingredient) => ingredient.Name === selectedIngredient
       );
 
       if (ingredientExist) {
         setIngredients((prevIngredients) =>
           prevIngredients.filter(
-            (ingredient) => ingredient.name !== selectedIngredient
+            (ingredient) => ingredient.Name !== selectedIngredient
           )
         );
       } else {
         const ingredientToAdd = allIngredientsList.find(
-          (ingredient) => ingredient.name === selectedIngredient
+          (ingredient) => ingredient.Name === selectedIngredient
         );
 
         if (ingredientToAdd) {

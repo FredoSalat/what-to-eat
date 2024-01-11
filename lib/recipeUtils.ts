@@ -1,15 +1,13 @@
 import axios from "axios";
+
 import { Ingredient, Recipe } from "./types";
 
 export async function allIngredients(): Promise<Ingredient[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
-    console.log(response);
-
     const recipes = response.data;
 
-    console.log(recipes);
     if (!recipes || !Array.isArray(recipes)) {
       throw new Error("Invalid response format from the server");
     }
@@ -42,11 +40,8 @@ export async function mostPopularIngredients(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
-    console.log(response);
-
     const recipes = response.data;
 
-    console.log(recipes);
     if (!recipes || !Array.isArray(recipes)) {
       throw new Error("Invalid response format from the server");
     }

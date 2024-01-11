@@ -3,7 +3,10 @@
 import { useRef, useState, useEffect } from "react";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
+import {
+  allIngredients,
+  allIngredients as getAllIngredients,
+} from "@/lib/recipeUtils";
 import { Ingredient } from "@/lib/types";
 
 export default function SearchBar() {
@@ -11,11 +14,23 @@ export default function SearchBar() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<Ingredient[]>([]);
+  const [tempAll, setTempAll] = useState<Ingredient[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement | null>(null);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
 
-  const allIngredients: Ingredient[] = getAllIngredients();
+  useEffect(() => {
+    const allIngredients = async () => {
+      try {
+        const allIngredients = await getAllIngredients();
+        setTempAll(allIngredients);
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+      }
+    };
+
+    allIngredients();
+  }, [ingredients]);
 
   const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
@@ -24,7 +39,7 @@ export default function SearchBar() {
     let filteredSuggestions: Ingredient[] = [];
 
     if (value.length > 1) {
-      filteredSuggestions = allIngredients.filter(
+      filteredSuggestions = tempAll.filter(
         (ingredient) =>
           ingredient.Name.toLowerCase().includes(value.toLowerCase()) &&
           !ingredients.includes(ingredient)

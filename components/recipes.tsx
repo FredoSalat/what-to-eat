@@ -1,10 +1,11 @@
 "use client";
 
-import { Recipe } from "@/lib/types";
+import { useEffect, useState } from "react";
+
 import Heading from "./heading";
 import RecipeCard from "./recipe-card";
+import { Recipe } from "@/lib/types";
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { useEffect, useState } from "react";
 import { findRecipe } from "@/lib/recipeUtils";
 
 export default function Recipes() {
@@ -12,8 +13,16 @@ export default function Recipes() {
   const [myRecipes, setMyRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    const recipes = findRecipe(ingredients);
-    setMyRecipes(recipes);
+    const fetchRecipes = async () => {
+      try {
+        const recipes = await findRecipe(ingredients);
+        setMyRecipes(recipes);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      }
+    };
+
+    fetchRecipes();
   }, [ingredients]);
 
   return (

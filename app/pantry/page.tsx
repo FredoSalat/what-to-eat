@@ -1,5 +1,5 @@
 import IngredientSelector from "@/components/ingredient-selector";
-import SearchBar from "@/components/search-bar";
+import SearchBar from "@/components/searchbar";
 import SelectedIngredients from "@/components/selected-ingredients";
 import Recipes from "@/components/recipes";
 
