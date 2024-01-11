@@ -3,18 +3,14 @@
 import { useRef, useState, useEffect } from "react";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import {
-  allIngredients,
-  allIngredients as getAllIngredients,
-} from "@/lib/recipeUtils";
-import { Ingredient } from "@/lib/types";
+import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
 
 export default function SearchBar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<Ingredient[]>([]);
-  const [tempAll, setTempAll] = useState<Ingredient[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [tempAll, setTempAll] = useState<string[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement | null>(null);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
@@ -36,12 +32,12 @@ export default function SearchBar() {
     const { value } = event.currentTarget;
     setSearchTerm(value);
 
-    let filteredSuggestions: Ingredient[] = [];
+    let filteredSuggestions: string[] = [];
 
     if (value.length > 1) {
       filteredSuggestions = tempAll.filter(
         (ingredient) =>
-          ingredient.Name.toLowerCase().includes(value.toLowerCase()) &&
+          ingredient.toLowerCase().includes(value.toLowerCase()) &&
           !ingredients.includes(ingredient)
       );
     }
@@ -49,11 +45,13 @@ export default function SearchBar() {
     setSuggestions(filteredSuggestions);
   };
 
-  const onSuggestionClickHandler = (suggestion: Ingredient) => {
-    addIngredient(suggestion.Name);
+  const onSuggestionClickHandler = (suggestion: string) => {
+    addIngredient(suggestion);
     setSuggestions([]);
     setSearchTerm("");
   };
+
+  console.log(ingredients);
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (
@@ -124,7 +122,7 @@ export default function SearchBar() {
               }`}
               onClick={() => onSuggestionClickHandler(suggestion)}
             >
-              {suggestion.Name}
+              {suggestion}
             </li>
           ))}
         </ul>

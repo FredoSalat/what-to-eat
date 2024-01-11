@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import { Ingredient, Recipe } from "./types";
+import { Recipe } from "./types";
 
-export async function allIngredients(): Promise<Ingredient[]> {
+export async function allIngredients(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
@@ -11,10 +11,10 @@ export async function allIngredients(): Promise<Ingredient[]> {
     if (!recipes || !Array.isArray(recipes)) {
       throw new Error("Invalid response format from the server");
     }
-    const ingredients = new Set<Ingredient>();
+    const ingredients = new Set<string>();
     for (const recipe of recipes) {
       for (const ingredient of recipe.ingredients) {
-        ingredients.add(ingredient);
+        ingredients.add(ingredient.name);
       }
     }
 
@@ -76,8 +76,8 @@ export async function findRecipe(
 
     const recipes = response.data;
 
-    return recipes.filter((recipe: Recipe) => {
-      for (const ingredient of recipe.Ingredients) {
+    return recipes.filter((recipe) => {
+      for (const ingredient of recipe.ingredients) {
         if (!pickedIngredients.includes(ingredient.Name)) {
           return false;
         }

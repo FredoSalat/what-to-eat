@@ -6,7 +6,7 @@ export default function SelectedIngredientsList() {
   return (
     <ul>
       {ingredients.map((ingredient, key) => (
-        <li key={key}>{ingredient.name}</li>
+        <li key={key}>{ingredient}</li>
       ))}
     </ul>
   );
