@@ -20,14 +20,14 @@ export async function GET(req: Request) {
           reject(err);
         } else {
           const parsedRows: Recipe[] = (rows as any[]).map((row) => {
-            const { title, imageUrl, ingredients } = row as {
+            const { title, imageURL, ingredients } = row as {
               title: string;
-              imageUrl: string;
+              imageURL: string;
               ingredients: string;
             };
             return {
               title,
-              imageUrl,
+              imageURL,
               ingredients: ingredients ? JSON.parse(ingredients) : [],
             };
           });

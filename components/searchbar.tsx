@@ -51,8 +51,6 @@ export default function Searchbar() {
     setSearchTerm("");
   };
 
-  console.log(ingredients);
-
   const handleOutsideClick = (event: MouseEvent) => {
     if (
       suggestionsListRef.current &&
