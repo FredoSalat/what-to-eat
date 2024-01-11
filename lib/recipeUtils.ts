@@ -1,8 +1,7 @@
 import axios from "axios";
-
 import { Recipe } from "./types";
 
-export async function allIngredients(): Promise<string[]> {
+export async function getAllIngredientNames(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
@@ -25,18 +24,7 @@ export async function allIngredients(): Promise<string[]> {
   }
 }
 
-/* export function allIngredientNames(): string[] {
-  const ingredients = new Set<string>();
-  for (const r of myRecipes) {
-    for (const ing of r.Ingredients) {
-      ingredients.add(ing.Name);
-    }
-  }
-
-  return [...ingredients];
-} */
-
-export async function mostPopularIngredients(): Promise<string[]> {
+export async function getMostPopularIngredients(): Promise<string[]> {
   try {
     const response = await axios.get(`/api/recipe`);
 
@@ -68,7 +56,7 @@ export async function mostPopularIngredients(): Promise<string[]> {
   }
 }
 
-export async function findRecipe(
+export async function getMatchingRecipes(
   pickedIngredients: string[]
 ): Promise<Recipe[]> {
   try {
@@ -76,9 +64,11 @@ export async function findRecipe(
 
     const recipes = response.data;
 
-    return recipes.filter((recipe) => {
+    console.log(recipes);
+
+    return recipes.filter((recipe: Recipe) => {
       for (const ingredient of recipe.ingredients) {
-        if (!pickedIngredients.includes(ingredient.Name)) {
+        if (!pickedIngredients.includes(ingredient.name)) {
           return false;
         }
       }

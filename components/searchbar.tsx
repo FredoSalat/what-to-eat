@@ -3,14 +3,14 @@
 import { useRef, useState, useEffect } from "react";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
+import { getAllIngredientNames } from "@/lib/recipeUtils";
 
-export default function SearchBar() {
+export default function Searchbar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [tempAll, setTempAll] = useState<string[]>([]);
+  const [allIngredientNames, setAllIngredientNames] = useState<string[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement | null>(null);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
@@ -18,8 +18,8 @@ export default function SearchBar() {
   useEffect(() => {
     const allIngredients = async () => {
       try {
-        const allIngredients = await getAllIngredients();
-        setTempAll(allIngredients);
+        const fetchedIngredientNames = await getAllIngredientNames();
+        setAllIngredientNames(fetchedIngredientNames);
       } catch (error) {
         console.error("Error fetching ingredients:", error);
       }
@@ -35,7 +35,7 @@ export default function SearchBar() {
     let filteredSuggestions: string[] = [];
 
     if (value.length > 1) {
-      filteredSuggestions = tempAll.filter(
+      filteredSuggestions = allIngredientNames.filter(
         (ingredient) =>
           ingredient.toLowerCase().includes(value.toLowerCase()) &&
           !ingredients.includes(ingredient)

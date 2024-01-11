@@ -1,9 +1,10 @@
 "use client";
 
-import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
-import { mostPopularIngredients } from "@/lib/recipeUtils";
 import { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
+
+import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
+import { getMostPopularIngredients } from "@/lib/recipeUtils";
 
 export default function IngredientSelector() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();
@@ -13,7 +14,7 @@ export default function IngredientSelector() {
   useEffect(() => {
     const fetchPopularIngredients = async () => {
       try {
-        const fetchedIngredients = await mostPopularIngredients();
+        const fetchedIngredients = await getMostPopularIngredients();
         setPopularIngredients(fetchedIngredients);
       } catch (error) {
         console.error("Error fetching popular ingredients:", error);
@@ -57,9 +58,7 @@ export default function IngredientSelector() {
           <li
             key={index}
             className={`border border-black/[0.1] px-2 py-1 rounded-md cursor-pointer transition-colors duration-100 ${
-              ingredients.some(
-                (ingredient) => ingredient.name === ingredientShowing
-              )
+              ingredients.some((ingredient) => ingredient === ingredientShowing)
                 ? "bg-blue-300 sm:hover:bg-blue-400"
                 : "sm:hover:bg-zinc-200 bg-white/5"
             }`}

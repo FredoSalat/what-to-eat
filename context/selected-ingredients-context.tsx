@@ -1,6 +1,6 @@
 "use client";
 
-import { allIngredients } from "@/lib/recipeUtils";
+import { getAllIngredientNames } from "@/lib/recipeUtils";
 import { createContext, useContext, useState } from "react";
 
 type SelectedIngredientsProviderProps = {
@@ -22,7 +22,7 @@ export default function SelectedIngredientsContextProvider({
 
   const addIngredient = async (selectedIngredient: string) => {
     try {
-      const allIngredientsList = await allIngredients();
+      const allIngredientNames = await getAllIngredientNames();
       const ingredientExist = ingredients.some(
         (ingredient) => ingredient === selectedIngredient
       );
@@ -34,7 +34,7 @@ export default function SelectedIngredientsContextProvider({
           )
         );
       } else {
-        const ingredientToAdd = allIngredientsList.find(
+        const ingredientToAdd = allIngredientNames.find(
           (ingredient) => ingredient === selectedIngredient
         );
 

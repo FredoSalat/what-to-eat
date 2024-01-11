@@ -2,11 +2,7 @@ import { NextResponse } from "next/server";
 import sqlite3 from "sqlite3";
 import path from "path";
 
-interface Recipe {
-  title: string;
-  imageUrl: string;
-  ingredients: string[];
-}
+import { Recipe } from "@/lib/types";
 
 export async function GET(req: Request) {
   const dbPath = path.resolve(process.cwd(), "lib", "recipe.db");
