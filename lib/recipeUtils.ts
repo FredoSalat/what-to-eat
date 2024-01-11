@@ -1,28 +1,33 @@
 import axios from "axios";
-import { Ingredient, Recipe, TempIngredient, myRecipes } from "./data";
+import { Ingredient, Recipe } from "./types";
 
-export async function allIngredients(): Promise<TempIngredient[]> {
-  const response = await axios.get(`/api/recipe`);
+export async function allIngredients(): Promise<Ingredient[]> {
+  try {
+    const response = await axios.get(`/api/recipe`);
 
-  console.log(response);
+    console.log(response);
 
-  const recipes = response.data;
+    const recipes = response.data;
 
-  console.log(recipes);
-  if (!recipes || !Array.isArray(recipes)) {
-    throw new Error("Invalid response format from the server");
-  }
-  const ingredients = new Set<TempIngredient>();
-  for (const recipe of recipes) {
-    for (const ingredient of recipe.ingredients) {
-      ingredients.add(ingredient);
+    console.log(recipes);
+    if (!recipes || !Array.isArray(recipes)) {
+      throw new Error("Invalid response format from the server");
     }
-  }
+    const ingredients = new Set<Ingredient>();
+    for (const recipe of recipes) {
+      for (const ingredient of recipe.ingredients) {
+        ingredients.add(ingredient);
+      }
+    }
 
-  return [...ingredients];
+    return [...ingredients];
+  } catch (error) {
+    console.error("[allIngredients]", error);
+    throw new Error("Error fetching or processing data");
+  }
 }
 
-export function allIngredientNames(): string[] {
+/* export function allIngredientNames(): string[] {
   const ingredients = new Set<string>();
   for (const r of myRecipes) {
     for (const ing of r.Ingredients) {
@@ -31,7 +36,7 @@ export function allIngredientNames(): string[] {
   }
 
   return [...ingredients];
-}
+} */
 
 export async function mostPopularIngredients(): Promise<string[]> {
   try {
@@ -68,13 +73,24 @@ export async function mostPopularIngredients(): Promise<string[]> {
   }
 }
 
-export function findRecipe(pickedIngredients: string[]): Recipe[] {
-  return myRecipes.filter((r) => {
-    for (const ing of r.Ingredients) {
-      if (!pickedIngredients.includes(ing.Name)) {
-        return false;
+export async function findRecipe(
+  pickedIngredients: string[]
+): Promise<Recipe[]> {
+  try {
+    const response = await axios.get(`/api/recipe`);
+
+    const recipes = response.data;
+
+    return recipes.filter((recipe: Recipe) => {
+      for (const ingredient of recipe.Ingredients) {
+        if (!pickedIngredients.includes(ingredient.Name)) {
+          return false;
+        }
       }
-    }
-    return true;
-  });
+      return true;
+    });
+  } catch (error) {
+    console.error("[findRecipe]", error);
+    throw new Error("Error fetching or processing data");
+  }
 }

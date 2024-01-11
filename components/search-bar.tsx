@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";
 import { allIngredients as getAllIngredients } from "@/lib/recipeUtils";
-import { Ingredient } from "@/lib/data";
+import { Ingredient } from "@/lib/types";
 
 export default function SearchBar() {
   const { addIngredient, ingredients } = useSelectedIngredientsContext();

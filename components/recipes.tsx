@@ -1,6 +1,6 @@
 "use client";
 
-import { Recipe } from "@/lib/data";
+import { Recipe } from "@/lib/types";
 import Heading from "./heading";
 import RecipeCard from "./recipe-card";
 import { useSelectedIngredientsContext } from "@/context/selected-ingredients-context";

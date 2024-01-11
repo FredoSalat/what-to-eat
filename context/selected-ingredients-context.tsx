@@ -1,6 +1,6 @@
 "use client";
 
-import { Ingredient, TempIngredient } from "@/lib/data";
+import { Ingredient, TempIngredient } from "@/lib/types";
 import { allIngredients } from "@/lib/recipeUtils";
 import { createContext, useContext, useState } from "react";
 

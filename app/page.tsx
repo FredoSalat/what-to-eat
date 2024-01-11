@@ -1,8 +1,4 @@
-import IngredientSelector from "@/components/ingredient-selector";
-import RecipeCard from "@/components/recipe-card";
 import Recipes from "@/components/recipes";
-import SearchBar from "@/components/search-bar";
-import SelectedIngredients from "@/components/pantry";
 
 export default function Home() {
   return (

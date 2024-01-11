@@ -1,7 +1,7 @@
 import IngredientSelector from "@/components/ingredient-selector";
 import SearchBar from "@/components/search-bar";
-import SelectedIngredients from "@/components/pantry";
-import React from "react";
+import SelectedIngredients from "@/components/selected-ingredients";
+import Recipes from "@/components/recipes";
 
 export default function page() {
   return (
@@ -10,6 +10,7 @@ export default function page() {
         <SearchBar />
         <IngredientSelector />
         <SelectedIngredients />
+        <Recipes />
       </div>
     </div>
   );
