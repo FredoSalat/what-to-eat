@@ -1,5 +1,5 @@
 export interface Recipe {
   title: string;
   imageURL: string;
-  ingredients: { name: string; preparation: string }[];
+  ingredients: { ingredient: string; preparation: string }[];
 }

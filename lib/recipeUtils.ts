@@ -13,7 +13,7 @@ export async function getAllIngredientNames(): Promise<string[]> {
     const ingredients = new Set<string>();
     for (const recipe of recipes) {
       for (const ingredient of recipe.ingredients) {
-        ingredients.add(ingredient.name);
+        ingredients.add(ingredient.ingredient);
       }
     }
 
@@ -39,8 +39,8 @@ export async function getMostPopularIngredients(): Promise<string[]> {
     for (const recipe of recipes) {
       if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
         for (const ingredient of recipe.ingredients) {
-          seenCountByIngredient[ingredient.name] ??= 0;
-          seenCountByIngredient[ingredient.name] += 1;
+          seenCountByIngredient[ingredient.ingredient] ??= 0;
+          seenCountByIngredient[ingredient.ingredient] += 1;
         }
       }
     }
@@ -68,7 +68,7 @@ export async function getMatchingRecipes(
 
     return recipes.filter((recipe: Recipe) => {
       for (const ingredient of recipe.ingredients) {
-        if (!pickedIngredients.includes(ingredient.name)) {
+        if (!pickedIngredients.includes(ingredient.ingredient)) {
           return false;
         }
       }

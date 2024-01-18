@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Card, CardBody } from "@chakra-ui/react";
 
 export default function RecipeCard({ ...recipe }) {
-  console.log(recipe);
   return (
     <Card maxH="sm">
       <CardBody>
