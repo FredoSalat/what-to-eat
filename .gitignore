@@ -35,8 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-lib/**/recipe.db
-
 lib/recipe.db
 
-recipe.db 
