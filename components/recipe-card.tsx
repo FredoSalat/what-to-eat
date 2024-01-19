@@ -3,13 +3,13 @@ import { Card, CardBody, Stack } from "@chakra-ui/react";
 
 export default function RecipeCard({ ...recipe }) {
   return (
-    <Card className="flex sm:flex-row h-[200px] w-full" variant="outline">
+    <Card className="sm:flex-row sm:h-[200px] h-[300px]" variant="outline">
       <Image
-        className="object-cover sm:w-1/2 sm:h-auto w-full"
+        className="object-cover sm:w-1/2 sm:h-auto h-2/3 w-full"
         src={`${recipe.imageURL}?fit=crop&crop=focalpoint&auto=format&fp-x=0.5&fp-y=0.5&fp-z=1.25&w=800&h=800`}
         alt={recipe.title}
-        width={400}
-        height={400}
+        width={600}
+        height={600}
       />
 
       <Stack>

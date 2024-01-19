@@ -34,7 +34,7 @@ export default function Recipes() {
       <h2 className="text-md font-bold text-center">
         Du kan laga {recipes.length} recept
       </h2>
-      <div className="flex flex-col justify-center gap-5 max-w-[800px] m-auto">
+      <div className="flex flex-col gap-5">
         {recipes.map((recipe, index) => (
           <RecipeCard key={index} {...recipe} />
         ))}
