@@ -79,3 +79,16 @@ export async function getMatchingRecipes(
     throw new Error("Error fetching or processing data");
   }
 }
+
+export async function tempGetTenRecipes(): Promise<Recipe[]> {
+  try {
+    const response = await axios.get(`/api/recipe`);
+
+    const recipes = response.data;
+
+    return recipes.slice(100, 110);
+  } catch (error) {
+    console.error("[findRecipe]", error);
+    throw new Error("Error fetching or processing data");
+  }
+}

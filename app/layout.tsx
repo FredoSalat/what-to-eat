@@ -26,7 +26,7 @@ export default function RootLayout({
           <SelectedIngredientsContextProvider>
             <Navbar />
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </SelectedIngredientsContextProvider>
         </Providers>
       </body>

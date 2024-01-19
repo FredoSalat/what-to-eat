@@ -102,7 +102,7 @@ export default function Searchbar() {
       </div>
       <input
         className="w-full p-4 ps-10 border-2 border-black/[0.1] transition-colors focus:outline-none focus:border-blue-200 rounded-md"
-        placeholder="Sök ingrediens"
+        placeholder="Vad har du för ingredienser?"
         onChange={onSearchHandler}
         onKeyDown={onKeyDownHandler}
         value={searchTerm}
