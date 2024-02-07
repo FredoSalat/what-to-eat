@@ -4,7 +4,7 @@ This is the repo for my personal project what to eat. This is a full stack appli
 
 Frontend: React, Next.js, Tailwind and Chakra UI.
 
-Backend:
+Backend: Next API, SQLite - The database is populated using a web crawler that I developed with Crawlee. You can find the project at this link: https://github.com/FredoSalat/recipe-crawler
 
 ## Installation
 
